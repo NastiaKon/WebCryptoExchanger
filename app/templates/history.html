@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+    <h3>Все операции клиента: {{ user.username }}</h3>
+	    <style type="text/css">
+      .mytable {
+        width: 100%;
+		border: 1px solid #333333;
+		font: 14px Verdana;
+		}
+	  .mytable_td {
+	    margin: 1px;
+		padding: 8px 10px;
+        width: 20%;
+		border: 1px solid #333333;
+	  }
+	  .td_num {
+		text-align: right;
+	  }
+	  .td_th {
+	    text-align: center;
+	  }		  
+	  .mytable tr:nth-child(even) {
+        background-color: #efefef;
+      }
+      .mytable tr:hover {
+        background-color: #cfcfcf;
+      }
+    </style>
+    <div class="row">
+	{% if user.last_seen %}
+    <p>Время последнего подключения: {{ moment(user.last_seen).format('LLL') }}</p>
+	{% endif %}
+
+	<label class="control-label">Баланс рублевого счета клиента:</label>
+	<p class="form-control">{{user.balance_rubl}}</p>
+	<label class="control-label">Баланс валютного счета клиента:</label> 
+	<p class="form-control">{{user.balance_curr}}</p>
+	  <table class="mytable">
+      <tr>
+	  <th class="mytable_td td_th">Дата-время</th>
+	  <th class="mytable_td td_th">Валюта</th>
+	  <th class="mytable_td td_th">Вид операции</th>
+	  <th class="mytable_td td_th">Сумма в валюте</th>
+	  <th class="mytable_td td_th">Сумма в рублях</th>
+	  </tr>
+    {% for trans in trs %}
+	  <tr>
+		<td class="mytable_td">{{ moment(trans.timestamp).format('LLL') }}</td>
+        <td class="mytable_td">{{ trans.transact.currency_full }}</td>
+		<td class="mytable_td">{{ trans.trans.operation_short }}</td>
+		<td class="mytable_td td_num">{{ trans.sum_curr }}</td>
+		<td class="mytable_td td_num">{{ trans.sum_rubl }}</td>
+	   </tr>
+    {% endfor %}
+	</div>
+	
+{% endblock %}

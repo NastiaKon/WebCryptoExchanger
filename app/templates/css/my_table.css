@@ -1,0 +1,29 @@
+.mytable_th {
+text-align: center;
+padding: 10px 10px;
+width: 15%;
+border: 1px solid #333333;
+height: 35px;
+}	
+.mytable_td {
+margin: 1px;
+padding: 10px 10px;
+width: 20%;
+border: 1px solid #333333;
+height: 35px;
+font: 14px Verdana;
+}
+.mytable {
+width: 100%;
+border: 1px solid #333333;
+font: 14px Verdana;
+}
+.mytable tr:nth-child(even) {
+background-color: #efefef;
+}
+.mytable tr:hover {
+background-color: #cfcfcf;
+}
+.pole {
+width: 100%;
+}

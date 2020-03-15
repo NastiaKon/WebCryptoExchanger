@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h3>Курсы криптовалют в нашем Банке</h3>
+    <style type="text/css">
+      .mytable {
+        width: 100%;
+		border: 1px solid #333333;
+		font: 14px Verdana;
+		}
+	  .mytable_td {
+	    margin: 1px;
+		padding: 8px 10px;
+        width: 16%;
+		border: 1px solid #333333;
+	  }
+	  .td_num {
+		text-align: right;
+	  }
+	  .td_th {
+	    text-align: center;
+	  }		  
+	  .mytable tr:nth-child(even) {
+        background-color: #efefef;
+      }
+      .mytable tr:hover {
+        background-color: #cfcfcf;
+      }
+    </style>
+    <div class="row">
+	  <table class="mytable">
+      <tr>
+	  <th class="mytable_td td_th">Криптовалюта</th>
+	  <th class="mytable_td td_th">Код</th>
+	  <th class="mytable_td td_th">Кол-во ед.</th>
+	  <th class="mytable_td td_th">Курс на Бирже(руб.)</th>
+	  <th class="mytable_td td_th">Курс Покупки</th>
+	  <th class="mytable_td td_th">Курс Продажи</th>
+	  </tr>
+    {% for val in vals %}
+	  <tr>
+		<td class="mytable_td">{{ val.currency_full }}</td>
+        <td class="mytable_td">{{ val.currency_short }}</td>
+		<td class="mytable_td td_num">{{ val.quantity }}</td>
+		<td class="mytable_td td_num">{{ val.c_course_market }}</td>
+		<td class="mytable_td td_num">{{ val.c_course_pokupka }}</td>
+		<td class="mytable_td td_num">{{ val.c_course_prodaza }}</td>
+	   </tr>
+    {% endfor %}
+	</div>
+{% endblock %}
